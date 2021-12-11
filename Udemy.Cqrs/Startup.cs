@@ -23,6 +23,8 @@ namespace Udemy.Cqrs
                 opt.UseSqlServer("server=(localdb)\\mssqllocaldb; database=StudentDb; integrated security=true;");
             });
 
+            services.AddScoped<GetStudentByIdQueryHandler>();
+
             services.AddControllers().AddNewtonsoftJson(opt=> {
                 opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
