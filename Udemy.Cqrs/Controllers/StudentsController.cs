@@ -8,10 +8,19 @@ namespace Udemy.Cqrs.Controllers
     public class StudentsController : ControllerBase
     {
         private readonly GetStudentByIdQueryHandler getStudentByIdQueryHandler;
+        private readonly GetStudentsQueryHandler getStudentsQueryHandler;
 
-        public StudentsController(GetStudentByIdQueryHandler getStudentByIdQueryHandler)
+        public StudentsController(GetStudentByIdQueryHandler getStudentByIdQueryHandler, GetStudentsQueryHandler getStudentsQueryHandler)
         {
             this.getStudentByIdQueryHandler = getStudentByIdQueryHandler;
+            this.getStudentsQueryHandler = getStudentsQueryHandler;
+        }
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var result = this.getStudentsQueryHandler.Handle(new GetStudentsQuery());
+            return Ok(result);
         }
 
         [HttpGet("{id}")]

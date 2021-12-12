@@ -24,6 +24,7 @@ namespace Udemy.Cqrs
             });
 
             services.AddScoped<GetStudentByIdQueryHandler>();
+            services.AddScoped<GetStudentsQueryHandler>();
 
             services.AddControllers().AddNewtonsoftJson(opt=> {
                 opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
