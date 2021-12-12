@@ -1,13 +1,9 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Udemy.Cqrs.CQRS.Handlers;
 using Udemy.Cqrs.Data;
 
 namespace Udemy.Cqrs
@@ -26,7 +22,8 @@ namespace Udemy.Cqrs
             services.AddScoped<GetStudentByIdQueryHandler>();
             services.AddScoped<GetStudentsQueryHandler>();
 
-            services.AddControllers().AddNewtonsoftJson(opt=> {
+            services.AddControllers().AddNewtonsoftJson(opt =>
+            {
                 opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
         }

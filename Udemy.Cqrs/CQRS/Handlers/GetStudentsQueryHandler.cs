@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using Udemy.Cqrs.CQRS.Queries;
+using Udemy.Cqrs.CQRS.Results;
 using Udemy.Cqrs.Data;
 
-namespace Udemy.Cqrs
+namespace Udemy.Cqrs.CQRS.Handlers
 {
     public class GetStudentsQueryHandler
     {

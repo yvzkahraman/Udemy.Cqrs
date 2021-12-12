@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Udemy.Cqrs.CQRS.Handlers;
+using Udemy.Cqrs.CQRS.Queries;
 
 namespace Udemy.Cqrs.Controllers
 {
@@ -26,7 +27,7 @@ namespace Udemy.Cqrs.Controllers
         [HttpGet("{id}")]
         public IActionResult GetStudent(int id)
         {
-           var result =  this.getStudentByIdQueryHandler.Handle(new GetStudentByIdQuery(id));
+            var result = this.getStudentByIdQueryHandler.Handle(new GetStudentByIdQuery(id));
             return Ok(result);
         }
     }

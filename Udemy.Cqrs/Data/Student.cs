@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Udemy.Cqrs.Data
+﻿namespace Udemy.Cqrs.Data
 {
     public class Student
     {

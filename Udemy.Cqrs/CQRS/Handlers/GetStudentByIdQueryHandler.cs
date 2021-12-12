@@ -1,6 +1,8 @@
-﻿using Udemy.Cqrs.Data;
+﻿using Udemy.Cqrs.CQRS.Queries;
+using Udemy.Cqrs.CQRS.Results;
+using Udemy.Cqrs.Data;
 
-namespace Udemy.Cqrs
+namespace Udemy.Cqrs.CQRS.Handlers
 {
     public class GetStudentByIdQueryHandler
     {
@@ -13,7 +15,7 @@ namespace Udemy.Cqrs
 
         public GetStudentByIdQueryResult Handle(GetStudentByIdQuery query)
         {
-           var student =  _context.Set<Student>().Find(query.Id);
+            var student = _context.Set<Student>().Find(query.Id);
             return new GetStudentByIdQueryResult
             {
                 Age = student.Age,

@@ -1,4 +1,4 @@
-﻿namespace Udemy.Cqrs
+﻿namespace Udemy.Cqrs.CQRS.Queries
 {
     public class GetStudentByIdQuery
     {
