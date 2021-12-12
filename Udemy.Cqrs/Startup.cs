@@ -21,6 +21,9 @@ namespace Udemy.Cqrs
 
             services.AddScoped<GetStudentByIdQueryHandler>();
             services.AddScoped<GetStudentsQueryHandler>();
+            services.AddScoped<CreateStudentCommandHandler>();
+            services.AddScoped<RemoveStudentCommandHandler>();
+            services.AddScoped<UpdateStudentCommandHandler>();
 
             services.AddControllers().AddNewtonsoftJson(opt =>
             {

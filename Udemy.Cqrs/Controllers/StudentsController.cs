@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Udemy.Cqrs.CQRS.Commands;
 using Udemy.Cqrs.CQRS.Handlers;
 using Udemy.Cqrs.CQRS.Queries;
 
@@ -10,11 +11,17 @@ namespace Udemy.Cqrs.Controllers
     {
         private readonly GetStudentByIdQueryHandler getStudentByIdQueryHandler;
         private readonly GetStudentsQueryHandler getStudentsQueryHandler;
+        private readonly CreateStudentCommandHandler createStudentCommandHandler;
+        private readonly RemoveStudentCommandHandler removeStudentCommandHandler;
+        private readonly UpdateStudentCommandHandler updateStudentCommandHandler;
 
-        public StudentsController(GetStudentByIdQueryHandler getStudentByIdQueryHandler, GetStudentsQueryHandler getStudentsQueryHandler)
+        public StudentsController(GetStudentByIdQueryHandler getStudentByIdQueryHandler, GetStudentsQueryHandler getStudentsQueryHandler, CreateStudentCommandHandler createStudentCommandHandler, RemoveStudentCommandHandler removeStudentCommandHandler, UpdateStudentCommandHandler updateStudentCommandHandler)
         {
             this.getStudentByIdQueryHandler = getStudentByIdQueryHandler;
             this.getStudentsQueryHandler = getStudentsQueryHandler;
+            this.createStudentCommandHandler = createStudentCommandHandler;
+            this.removeStudentCommandHandler = removeStudentCommandHandler;
+            this.updateStudentCommandHandler = updateStudentCommandHandler;
         }
 
         [HttpGet]
@@ -29,6 +36,27 @@ namespace Udemy.Cqrs.Controllers
         {
             var result = this.getStudentByIdQueryHandler.Handle(new GetStudentByIdQuery(id));
             return Ok(result);
+        }
+
+        [HttpPost]
+        public IActionResult Create(CreateStudentCommand command)
+        {
+            this.createStudentCommandHandler.Handle(command);
+            return Created("",command.Name);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Remove(int id)
+        {
+            this.removeStudentCommandHandler.Handle(new RemoveStudentCommand(id));
+            return NoContent();
+        }
+
+        [HttpPut]
+        public IActionResult Update(UpdateStudentCommand command)
+        {
+            this.updateStudentCommandHandler.Handle(command);
+            return NoContent();
         }
     }
 }
