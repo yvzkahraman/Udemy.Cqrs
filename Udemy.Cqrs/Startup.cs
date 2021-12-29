@@ -1,3 +1,4 @@
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -19,11 +20,12 @@ namespace Udemy.Cqrs
                 opt.UseSqlServer("server=(localdb)\\mssqllocaldb; database=StudentDb; integrated security=true;");
             });
 
-            services.AddScoped<GetStudentByIdQueryHandler>();
-            services.AddScoped<GetStudentsQueryHandler>();
-            services.AddScoped<CreateStudentCommandHandler>();
-            services.AddScoped<RemoveStudentCommandHandler>();
-            services.AddScoped<UpdateStudentCommandHandler>();
+            services.AddMediatR(typeof(Startup));
+            //services.AddScoped<GetStudentByIdQueryHandler>();
+            //services.AddScoped<GetStudentsQueryHandler>();
+            //services.AddScoped<CreateStudentCommandHandler>();
+            //services.AddScoped<RemoveStudentCommandHandler>();
+            //services.AddScoped<UpdateStudentCommandHandler>();
 
             services.AddControllers().AddNewtonsoftJson(opt =>
             {

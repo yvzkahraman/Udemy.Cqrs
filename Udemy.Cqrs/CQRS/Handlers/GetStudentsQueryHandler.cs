@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using Udemy.Cqrs.CQRS.Queries;
@@ -7,7 +8,7 @@ using Udemy.Cqrs.Data;
 
 namespace Udemy.Cqrs.CQRS.Handlers
 {
-    public class GetStudentsQueryHandler
+    public class GetStudentsQueryHandler 
     {
         private readonly StudentContext _context;
 
