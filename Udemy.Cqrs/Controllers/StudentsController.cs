@@ -11,33 +11,18 @@ namespace Udemy.Cqrs.Controllers
     [ApiController]
     public class StudentsController : ControllerBase
     {
-        //private readonly GetStudentByIdQueryHandler getStudentByIdQueryHandler;
-        //private readonly GetStudentsQueryHandler getStudentsQueryHandler;
-        //private readonly CreateStudentCommandHandler createStudentCommandHandler;
-        //private readonly RemoveStudentCommandHandler removeStudentCommandHandler;
-        //private readonly UpdateStudentCommandHandler updateStudentCommandHandler;
-
-        //public StudentsController(GetStudentByIdQueryHandler getStudentByIdQueryHandler, GetStudentsQueryHandler getStudentsQueryHandler, CreateStudentCommandHandler createStudentCommandHandler, RemoveStudentCommandHandler removeStudentCommandHandler, UpdateStudentCommandHandler updateStudentCommandHandler)
-        //{
-        //    this.getStudentByIdQueryHandler = getStudentByIdQueryHandler;
-        //    this.getStudentsQueryHandler = getStudentsQueryHandler;
-        //    this.createStudentCommandHandler = createStudentCommandHandler;
-        //    this.removeStudentCommandHandler = removeStudentCommandHandler;
-        //    this.updateStudentCommandHandler = updateStudentCommandHandler;
-        //}
-
         private readonly IMediator _mediator;
         public StudentsController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
-        //[HttpGet]
-        //public IActionResult GetAll()
-        //{
-        //    var result = this.getStudentsQueryHandler.Handle(new GetStudentsQuery());
-        //    return Ok(result);
-        //}
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var result = await _mediator.Send(new GetStudentsQuery());
+            return Ok(result);
+        }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetStudent(int id)
@@ -46,25 +31,25 @@ namespace Udemy.Cqrs.Controllers
             return Ok(result);
         }
 
-        //[HttpPost]
-        //public IActionResult Create(CreateStudentCommand command)
-        //{
-        //    this.createStudentCommandHandler.Handle(command);
-        //    return Created("",command.Name);
-        //}
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateStudentCommand command)
+        {
+            await _mediator.Send(command);
+            return Created("", command.Name);
+        }
 
-        //[HttpDelete("{id}")]
-        //public IActionResult Remove(int id)
-        //{
-        //    this.removeStudentCommandHandler.Handle(new RemoveStudentCommand(id));
-        //    return NoContent();
-        //}
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Remove(int id)
+        { 
+            await _mediator.Send(new RemoveStudentCommand(id));
+            return NoContent();
+        }
 
-        //[HttpPut]
-        //public IActionResult Update(UpdateStudentCommand command)
-        //{
-        //    this.updateStudentCommandHandler.Handle(command);
-        //    return NoContent();
-        //}
+        [HttpPut]
+        public async Task<IActionResult> Update(UpdateStudentCommand command)
+        {
+            await _mediator.Send(command);
+            return NoContent();
+        }
     }
 }

@@ -1,6 +1,10 @@
-﻿namespace Udemy.Cqrs.CQRS.Queries
+﻿using MediatR;
+using System.Collections.Generic;
+using Udemy.Cqrs.CQRS.Results;
+
+namespace Udemy.Cqrs.CQRS.Queries
 {
-    public class GetStudentsQuery
+    public class GetStudentsQuery : IRequest<IEnumerable<GetStudentsQueryResult>>
     {
     }
 }
